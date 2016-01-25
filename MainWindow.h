@@ -13,10 +13,15 @@ class MainWindow : public QMainWindow
 
 public:
     explicit MainWindow(QWidget *parent = 0);
-    ~MainWindow() { delete ui; }
+    ~MainWindow();
+
+private slots:
+    void on_AddEventButton_clicked();
+
+    void addEvent();
 
 private:
-    Ui::MainWindow *ui;
+    Ui::MainWindow* ui_;
 };
 
 #endif // MAIN_WINDOW_H

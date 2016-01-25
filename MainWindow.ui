@@ -16,6 +16,12 @@
     <verstretch>0</verstretch>
    </sizepolicy>
   </property>
+  <property name="minimumSize">
+   <size>
+    <width>758</width>
+    <height>599</height>
+   </size>
+  </property>
   <property name="maximumSize">
    <size>
     <width>758</width>
@@ -103,7 +109,7 @@
      <attribute name="title">
       <string>Заметки</string>
      </attribute>
-     <widget class="QTextEdit" name="textEdit">
+     <widget class="QTextEdit" name="NotesTextField">
       <property name="geometry">
        <rect>
         <x>10</x>

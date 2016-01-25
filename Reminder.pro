@@ -12,9 +12,18 @@ TARGET = Reminder
 TEMPLATE = app
 
 
-SOURCES += main.cpp\
-        main_window.cpp
+SOURCES +=\
+    AddEventDialog.cpp \
+    MainWindow.cpp \
+    main.cpp \
+    EnterPassword.cpp
 
-HEADERS  += main_window.h
+HEADERS  += \
+    AddEventDialog.h \
+    MainWindow.h \
+    EnterPassword.h
 
-FORMS    += main_window.ui
+FORMS    += \
+    AddEventDialog.ui \
+    MainWindow.ui \
+    EnterPassword.ui
