@@ -16,14 +16,17 @@ SOURCES +=\
     AddEventDialog.cpp \
     MainWindow.cpp \
     main.cpp \
-    EnterPassword.cpp
+    ChangePasswordDialog.cpp \
+    EnterPasswordDialog.cpp
 
 HEADERS  += \
     AddEventDialog.h \
     MainWindow.h \
-    EnterPassword.h
+    ChangePasswordDialog.h \
+    EnterPasswordDialog.h
 
 FORMS    += \
     AddEventDialog.ui \
     MainWindow.ui \
-    EnterPassword.ui
+    ChangePasswordDialog.ui \
+    EnterPasswordDialog.ui

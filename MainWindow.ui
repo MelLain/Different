@@ -67,7 +67,7 @@
         <x>15</x>
         <y>11</y>
         <width>701</width>
-        <height>431</height>
+        <height>461</height>
        </rect>
       </property>
       <column>
@@ -95,13 +95,26 @@
       <property name="geometry">
        <rect>
         <x>30</x>
-        <y>450</y>
-        <width>191</width>
+        <y>490</y>
+        <width>181</width>
         <height>23</height>
        </rect>
       </property>
       <property name="text">
        <string>Добавить событие</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="DelEventButton">
+      <property name="geometry">
+       <rect>
+        <x>220</x>
+        <y>490</y>
+        <width>171</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Удалить событие (-я)</string>
       </property>
      </widget>
     </widget>
@@ -146,7 +159,7 @@
         <x>10</x>
         <y>20</y>
         <width>431</width>
-        <height>471</height>
+        <height>431</height>
        </rect>
       </property>
       <property name="sizePolicy">
@@ -157,6 +170,32 @@
       </property>
       <property name="title">
        <string>Детальная иформация</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="AddSkillButton">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>460</y>
+        <width>211</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Добавить умение</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="DelSkillButton">
+      <property name="geometry">
+       <rect>
+        <x>230</x>
+        <y>460</y>
+        <width>211</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Удалить умения</string>
       </property>
      </widget>
     </widget>
@@ -213,7 +252,7 @@
        <string>Добавить</string>
       </property>
      </widget>
-     <widget class="QPushButton" name="AddFriendButton_2">
+     <widget class="QPushButton" name="EditFriendButton">
       <property name="geometry">
        <rect>
         <x>210</x>
@@ -226,7 +265,7 @@
        <string>Редактировать</string>
       </property>
      </widget>
-     <widget class="QPushButton" name="AddFriendButton_3">
+     <widget class="QPushButton" name="DelFriendButton">
       <property name="geometry">
        <rect>
         <x>400</x>
@@ -260,11 +299,11 @@
     <property name="title">
      <string>Пользователь</string>
     </property>
-    <addaction name="action"/>
+    <addaction name="action_1"/>
+    <addaction name="separator"/>
+    <addaction name="action_2"/>
     <addaction name="separator"/>
     <addaction name="action_3"/>
-    <addaction name="separator"/>
-    <addaction name="action_5"/>
    </widget>
    <addaction name="menu"/>
   </widget>
@@ -277,17 +316,17 @@
    </attribute>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
-  <action name="action">
+  <action name="action_1">
    <property name="text">
     <string>Сменить пароль</string>
    </property>
   </action>
-  <action name="action_3">
+  <action name="action_2">
    <property name="text">
     <string>Сохранить</string>
    </property>
   </action>
-  <action name="action_5">
+  <action name="action_3">
    <property name="text">
     <string>Выход</string>
    </property>
