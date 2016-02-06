@@ -38,6 +38,7 @@ void ChangePasswordDialog::activateAcceptButton()
 void ChangePasswordDialog::changePassword()
 {
     *password_ = QString(ui_->newPasswordText->text());
+    close();
 }
 
 void ChangePasswordDialog::showNewPassword()

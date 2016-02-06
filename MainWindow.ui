@@ -70,6 +70,9 @@
         <height>461</height>
        </rect>
       </property>
+      <attribute name="horizontalHeaderDefaultSectionSize">
+       <number>150</number>
+      </attribute>
       <column>
        <property name="text">
         <string>Событие</string>
@@ -87,7 +90,7 @@
       </column>
       <column>
        <property name="text">
-        <string>Важность</string>
+        <string>Приоритет</string>
        </property>
       </column>
      </widget>
@@ -101,10 +104,13 @@
        </rect>
       </property>
       <property name="text">
-       <string>Добавить событие</string>
+       <string>Добавить</string>
+      </property>
+      <property name="shortcut">
+       <string>Ctrl+N</string>
       </property>
      </widget>
-     <widget class="QPushButton" name="DelEventButton">
+     <widget class="QPushButton" name="DelEventsButton">
       <property name="geometry">
        <rect>
         <x>220</x>
@@ -114,7 +120,10 @@
        </rect>
       </property>
       <property name="text">
-       <string>Удалить событие (-я)</string>
+       <string>Удалить</string>
+      </property>
+      <property name="shortcut">
+       <string>Del</string>
       </property>
      </widget>
     </widget>
@@ -218,6 +227,9 @@
         <height>0</height>
        </size>
       </property>
+      <attribute name="horizontalHeaderDefaultSectionSize">
+       <number>150</number>
+      </attribute>
       <column>
        <property name="text">
         <string>Имя</string>
@@ -251,8 +263,11 @@
       <property name="text">
        <string>Добавить</string>
       </property>
+      <property name="shortcut">
+       <string>Ctrl+N</string>
+      </property>
      </widget>
-     <widget class="QPushButton" name="EditFriendButton">
+     <widget class="QPushButton" name="DelFriendsButton">
       <property name="geometry">
        <rect>
         <x>210</x>
@@ -262,27 +277,12 @@
        </rect>
       </property>
       <property name="text">
-       <string>Редактировать</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="DelFriendButton">
-      <property name="geometry">
-       <rect>
-        <x>400</x>
-        <y>490</y>
-        <width>181</width>
-        <height>23</height>
-       </rect>
-      </property>
-      <property name="text">
        <string>Удалить</string>
       </property>
+      <property name="shortcut">
+       <string>Del</string>
+      </property>
      </widget>
-    </widget>
-    <widget class="QWidget" name="tab_5">
-     <attribute name="title">
-      <string>Деньги</string>
-     </attribute>
     </widget>
    </widget>
   </widget>
@@ -325,10 +325,16 @@
    <property name="text">
     <string>Сохранить</string>
    </property>
+   <property name="shortcut">
+    <string>Ctrl+S</string>
+   </property>
   </action>
   <action name="action_3">
    <property name="text">
     <string>Выход</string>
+   </property>
+   <property name="shortcut">
+    <string>Esc</string>
    </property>
   </action>
  </widget>

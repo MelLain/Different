@@ -24,7 +24,6 @@ private:
 
     QTableWidget* table_;
 
-    QString limitConvert(int i);
 };
 
 #endif // ADD_EVENT_DIALOG_H
