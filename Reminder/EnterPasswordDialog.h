@@ -3,6 +3,8 @@
 
 #include <QDialog>
 
+#include "common.h"
+
 namespace Ui {
 class EnterPasswordDialog;
 }

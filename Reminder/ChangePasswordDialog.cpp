@@ -1,8 +1,6 @@
 #include "ChangePasswordDialog.h"
 #include "ui_ChangePasswordDialog.h"
 
-#include <QDebug>
-
 ChangePasswordDialog::ChangePasswordDialog(QString* password, QWidget* parent) :
     QDialog(parent),
     ui_(new Ui::ChangePasswordDialog),

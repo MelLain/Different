@@ -1,9 +1,5 @@
-#include <QComboBox>
-
 #include "AddEventDialog.h"
 #include "ui_AddEventDialog.h"
-
-#include <QDebug>
 
 AddEventDialog::AddEventDialog(QTableWidget* table, QWidget* parent) :
     QDialog(parent),
@@ -29,10 +25,13 @@ void AddEventDialog::addEvent()
     table_->setCellWidget(table_->rowCount() - 1, 2, new QDateEdit(ui_->EventDateEdit->date()));
 
     auto combo_box_ptr = new QComboBox();
-    combo_box_ptr->addItem("Низкий");
-    combo_box_ptr->addItem("Средний");
-    combo_box_ptr->addItem("Высокий");
-    combo_box_ptr->setCurrentIndex(-2 - ui_->EventLevelRadioButtonsGroup->checkedId());
+    combo_box_ptr->addItem(EVENT_LOW_RUS);
+    combo_box_ptr->addItem(EVENT_MIDDLE_RUS);
+    combo_box_ptr->addItem(EVENT_HIGH_RUS);
+
+    int value = RADIO_BUTTON_SHIFT - ui_->EventLevelRadioButtonsGroup->checkedId();
+
+    combo_box_ptr->setCurrentIndex(value);
     table_->setCellWidget(table_->rowCount() - 1, 3, combo_box_ptr);
 
     close();

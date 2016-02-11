@@ -9,8 +9,8 @@ SaveExitDialog::SaveExitDialog(QWidget* parent) :
 {
     ui_->setupUi(this);
     connect(ui_->CancelButton, SIGNAL(clicked()), this, SLOT(close()));
-    connect(ui_->SaveExitButton, SIGNAL(clicked()), this, SLOT(SaveExit()));
-    connect(ui_->OnlyExitButton, SIGNAL(clicked()), this, SLOT(OnlyExit()));
+    connect(ui_->SaveExitButton, SIGNAL(clicked()), this, SLOT(saveExit()));
+    connect(ui_->OnlyExitButton, SIGNAL(clicked()), this, SLOT(onlyExit()));
 }
 
 SaveExitDialog::~SaveExitDialog()
@@ -18,13 +18,13 @@ SaveExitDialog::~SaveExitDialog()
     delete ui_;
 }
 
-void SaveExitDialog::SaveExit()
+void SaveExitDialog::saveExit()
 {
     dynamic_cast<MainWindow*>(parentWidget())->saveData();
     OnlyExit();
 }
 
-void SaveExitDialog::OnlyExit()
+void SaveExitDialog::onlyExit()
 {
     parentWidget()->close();
 }

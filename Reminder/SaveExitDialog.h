@@ -3,6 +3,8 @@
 
 #include <QDialog>
 
+#include "common.h"
+
 namespace Ui {
 class SaveExitDialog;
 }
@@ -16,8 +18,8 @@ public:
     ~SaveExitDialog();
 
 private slots:
-    void SaveExit();
-    void OnlyExit();
+    void saveExit();
+    void onlyExit();
 
 private:
     Ui::SaveExitDialog* ui_;

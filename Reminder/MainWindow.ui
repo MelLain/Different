@@ -33,7 +33,7 @@
   </property>
   <property name="windowIcon">
    <iconset>
-    <normaloff>../../../Temp/qwerty.png</normaloff>../../../Temp/qwerty.png</iconset>
+    <normaloff>img/accept.jpg</normaloff>img/accept.jpg</iconset>
   </property>
   <widget class="QWidget" name="centralWidget">
    <widget class="QTabWidget" name="MainTab">
@@ -52,7 +52,7 @@
      </sizepolicy>
     </property>
     <property name="currentIndex">
-     <number>4</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="tab_1">
      <property name="toolTip">
@@ -75,7 +75,7 @@
       </attribute>
       <column>
        <property name="text">
-        <string>Событие</string>
+        <string>Событие (задача)</string>
        </property>
       </column>
       <column>
@@ -281,6 +281,64 @@
       </property>
       <property name="shortcut">
        <string>Del</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="upButton">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>420</x>
+        <y>490</y>
+        <width>41</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="icon">
+       <iconset>
+        <normaloff>img/up_arrow.png</normaloff>img/up_arrow.png</iconset>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>32</width>
+        <height>32</height>
+       </size>
+      </property>
+      <property name="shortcut">
+       <string>Up</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="downButton">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>470</x>
+        <y>490</y>
+        <width>41</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="icon">
+       <iconset>
+        <normaloff>img/down_arrow.png</normaloff>img/down_arrow.png</iconset>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>32</width>
+        <height>32</height>
+       </size>
+      </property>
+      <property name="shortcut">
+       <string>Down</string>
       </property>
      </widget>
     </widget>

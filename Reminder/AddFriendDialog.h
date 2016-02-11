@@ -2,7 +2,8 @@
 #define ADD_FRIEND_DIALOG_H
 
 #include <QDialog>
-#include <QTableWidget>
+
+#include "common.h"
 
 namespace Ui {
 class AddFriendDialog;

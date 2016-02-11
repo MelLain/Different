@@ -2,8 +2,8 @@
 #define MAIN_WINDOW_H
 
 #include <QMainWindow>
-#include <QDate>
-#include <QString>
+
+#include "common.h"
 
 namespace Ui {
 class MainWindow;
@@ -86,6 +86,7 @@ private slots:
     void changePassword();
     void changeMoneyDiff();
     void requestExit();
+    void setQLineEditColor(QLineEdit* line_edit_ptr, int value);
 
 private:
     Ui::MainWindow* ui_;

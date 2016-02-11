@@ -27,7 +27,8 @@ HEADERS  += \
     ChangePasswordDialog.h \
     EnterPasswordDialog.h \
     AddFriendDialog.h \
-    SaveExitDialog.h
+    SaveExitDialog.h \
+    common.h
 
 FORMS    += \
     AddEventDialog.ui \

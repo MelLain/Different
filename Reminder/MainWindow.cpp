@@ -1,11 +1,5 @@
 #include <algorithm>
 
-#include <QFile>
-#include <QTextStream>
-#include <QDate>
-#include <QComboBox>
-#include <QVector>
-
 #include "MainWindow.h"
 #include "ui_MainWindow.h"
 #include "AddEventDialog.h"
@@ -18,8 +12,6 @@
 #include "ui_AddFriendDialog.h"
 #include "SaveExitDialog.h"
 #include "ui_SaveExitDialog.h"
-
-#include <QDebug>
 
 Money::Money() :
     cur_rub_nal_value_(0),
@@ -113,7 +105,7 @@ Money::Money() :
 MainWindow::MainWindow(QWidget* parent) :
     QMainWindow(parent),
     ui_(new Ui::MainWindow),
-    data_file_name_("C:/Users/MelLain/reminder.dat"),
+    data_file_name_(DATA_FILE_PATH),
     password_(QString()),
     money_(Money())
 {
@@ -203,8 +195,8 @@ void MainWindow::delFriends()
 
 void MainWindow::changeMoneyDiff()
 {
-    QVector<bool> is_correct(12, true);
-    QVector<float> new_values(12 + 3, 0.0f);
+    QVector<bool> is_correct(MONEY_EDIT_FIELDS_COUNT /*= 12*/, true);
+    QVector<float> new_values(MONEY_EDIT_FIELDS_COUNT + MONEY_DIFF_FIELDS_COUNT, 0.0f);
 
     new_values[0] = ui_->CurRubNalEdit->text().toFloat(&is_correct[0]);
     new_values[1] = ui_->CurEurNalEdit->text().toFloat(&is_correct[1]);
@@ -259,6 +251,10 @@ void MainWindow::changeMoneyDiff()
     ui_->RubDiffEdit->setText(value_str.setNum(money_.getRubDiffValue()));
     ui_->EurDiffEdit->setText(value_str.setNum(money_.getEurDiffValue()));
     ui_->UsdDiffEdit->setText(value_str.setNum(money_.getUsdDiffValue()));
+
+    setQLineEditColor(ui_->RubDiffEdit, money_.getRubDiffValue());
+    setQLineEditColor(ui_->EurDiffEdit, money_.getEurDiffValue());
+    setQLineEditColor(ui_->UsdDiffEdit, money_.getUsdDiffValue());
 }
 
 void MainWindow::requestExit()
@@ -344,9 +340,9 @@ void MainWindow::loadData()
                                                                     date_str[0].toInt())));
 
                 auto combo_box_ptr = new QComboBox();
-                combo_box_ptr->addItem("Низкий");
-                combo_box_ptr->addItem("Средний");
-                combo_box_ptr->addItem("Высокий");
+                combo_box_ptr->addItem(EVENT_LOW_RUS);
+                combo_box_ptr->addItem(EVENT_MIDDLE_RUS);
+                combo_box_ptr->addItem(EVENT_HIGH_RUS);
                 combo_box_ptr->setCurrentIndex(stream.readLine().toInt());
                 ui_->EventsTable->setCellWidget(ui_->EventsTable->rowCount() - 1, 3, combo_box_ptr);
             }
@@ -360,9 +356,9 @@ void MainWindow::loadData()
                                           new QTableWidgetItem(stream.readLine()));
 
                 auto combo_box_ptr = new QComboBox();
-                combo_box_ptr->addItem("Приятель");
-                combo_box_ptr->addItem("Друг");
-                combo_box_ptr->addItem("Близкий друг");
+                combo_box_ptr->addItem(FRIEND_LOW_RUS);
+                combo_box_ptr->addItem(FRIEND_MIDDLE_RUS);
+                combo_box_ptr->addItem(FRIEND_HIGH_RUS);
                 combo_box_ptr->setCurrentIndex(stream.readLine().toInt());
                 ui_->FriendsTable->setCellWidget(ui_->FriendsTable->rowCount() - 1, 1, combo_box_ptr);
                 ui_->FriendsTable->setItem(ui_->FriendsTable->rowCount() - 1, 2,
@@ -402,4 +398,15 @@ void MainWindow::loadData()
         file.close();
     }
     catch(...) { }
+}
+
+void MainWindow::setQLineEditColor(QLineEdit* line_edit_ptr, int value)
+{
+    QPalette p = line_edit_ptr->palette();
+    p.setColor(QPalette::Base, Qt::white);
+    if (value >= 0)
+        p.setColor(QPalette::Text, Qt::green);
+    else
+        p.setColor(QPalette::Text, Qt::red);
+    line_edit_ptr->setPalette(p);
 }
