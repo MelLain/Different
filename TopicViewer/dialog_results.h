@@ -18,6 +18,7 @@ public:
     explicit DialogResults(std::shared_ptr<QVector<int> > interpret_level,
                            std::shared_ptr<QVector<int> > ethnic_level,
                            std::shared_ptr<QMap<QString, QVector<int>> > checked_tokens,
+                           std::shared_ptr<QVector<QString> > topic_names,
                            QWidget* parent = 0);
     ~DialogResults();
 
@@ -32,6 +33,7 @@ private:
     std::shared_ptr<QVector<int> > interpret_level_;
     std::shared_ptr<QVector<int> > ethnic_level_;
     std::shared_ptr<QMap<QString, QVector<int>> > checked_tokens_;
+    std::shared_ptr<QVector<QString> > topic_names_;
 };
 
 #endif // DIALOG_RESULTS_H

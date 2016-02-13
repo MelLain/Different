@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>DialogAbout</class>
+ <widget class="QDialog" name="DialogAbout">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>490</width>
+    <height>70</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>490</width>
+    <height>70</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>490</width>
+    <height>70</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>О программе</string>
+  </property>
+  <property name="modal">
+   <bool>true</bool>
+  </property>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>10</y>
+     <width>481</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>TopicViewer - программа для удобного оценивая результатов тематического моделирования.</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_2">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>40</y>
+     <width>271</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Автор: Мурат Апишев (great-mel@yandex.ru)</string>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

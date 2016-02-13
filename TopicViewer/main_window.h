@@ -32,6 +32,8 @@ private slots:
     void prevPage();
     void showResults();
     void saveCheckedTokens();
+    void openHelp();
+    void openAbout();
 
 private:
     Ui::MainWindow* ui_;

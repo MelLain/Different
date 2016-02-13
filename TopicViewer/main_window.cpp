@@ -5,6 +5,10 @@
 #include "ui_dialog_file_open_error.h"
 #include "dialog_results.h"
 #include "ui_dialog_results.h"
+#include "dialog_help.h"
+#include "ui_dialog_help.h"
+#include "dialog_about.h"
+#include "ui_dialog_about.h"
 
 #include <algorithm>
 #include <string>
@@ -14,6 +18,7 @@
 #include <QTextStream>
 #include <QStringList>
 #include <QCheckBox>
+#include <QKeySequence>
 
 #include <QDebug>
 
@@ -33,10 +38,12 @@ MainWindow::MainWindow(QWidget* parent) :
 
     resetMainWindow();
 
-    connect(ui_->ActionExit, SIGNAL(triggered()), this, SLOT(close()));
-    connect(ui_->ActionOpen, SIGNAL(triggered()), this, SLOT(openFile()));
-    connect(ui_->NextButton, SIGNAL(clicked()), this, SLOT(nextPage()));
-    connect(ui_->PrevButton, SIGNAL(clicked()), this, SLOT(prevPage()));
+    connect(ui_->ActionExit,  SIGNAL(triggered()), this, SLOT(close()));
+    connect(ui_->ActionOpen,  SIGNAL(triggered()), this, SLOT(openFile()));
+    connect(ui_->ActionHelp,  SIGNAL(triggered()), this, SLOT(openHelp()));
+    connect(ui_->ActionAbout, SIGNAL(triggered()), this, SLOT(openAbout()));
+    connect(ui_->NextButton,  SIGNAL(clicked()), this, SLOT(nextPage()));
+    connect(ui_->PrevButton,  SIGNAL(clicked()), this, SLOT(prevPage()));
 }
 
 MainWindow::~MainWindow()
@@ -58,68 +65,78 @@ void MainWindow::resetMainWindow()
 
 void MainWindow::openFile()
 {
-    resetMainWindow();
-    source_file_name_ = QFileDialog::getOpenFileName(this,
-         tr("Open file with topics"), "/", tr("Text Files (*.txt)"));
-
+    bool canceled = false;
     try
     {
-        QFile file(source_file_name_);
-        if (file.open(QIODevice::ReadOnly))
+        resetMainWindow();
+        source_file_name_ = QFileDialog::getOpenFileName(this,
+             tr("Open file with topics"), "/", tr("Text Files (*.txt)"));
+
+        if (source_file_name_.isEmpty())
+            canceled = true;
+
+        if (!canceled)
         {
-            QTextStream stream(&file);
-            stream.setCodec("UTF-8");
-
-            bool reading_started = false;
-            while (!stream.atEnd())
+            QFile file(source_file_name_);
+            if (file.open(QIODevice::ReadOnly))
             {
-                QString current_line = stream.readLine();
-                if (current_line == START_MARKER)
+                QTextStream stream(&file);
+                stream.setCodec("UTF-8");
+
+                bool reading_started = false;
+                while (!stream.atEnd())
                 {
-                    reading_started = true;
-                    continue;
-                }
-
-                if (reading_started) {
-                    QStringList current_topic_data = current_line.split(' ');
-
-                    for (int i = 0; i < current_topic_data.size(); ++i)
+                    QString current_line = stream.readLine();
+                    if (current_line == START_MARKER)
                     {
-                        if (current_topic_data[i].isEmpty())
-                            continue;
+                        reading_started = true;
+                        continue;
+                    }
 
-                        if (i == 0)  // read topic name
+                    if (reading_started) {
+                        QStringList current_topic_data = current_line.split(' ');
+
+                        for (int i = 0; i < current_topic_data.size(); ++i)
                         {
-                            topic_names_->append(current_topic_data[i].mid(0,
-                                                     current_topic_data[i].size() - 1));
+                            if (current_topic_data[i].isEmpty())
+                                continue;
 
-                            interpret_level_->append(0);
-                            ethnic_level_->append(0);
-                        }
+                            if (i == 0)  // read topic name
+                            {
+                                topic_names_->append(current_topic_data[i].mid(0,
+                                                         current_topic_data[i].size() - 1));
 
-                        if (i > 0) {  // read topic data
-                            if (i == 1)
-                                topic_data_->append(QVector<QString>());
+                                interpret_level_->append(0);
+                                ethnic_level_->append(0);
+                            }
 
-                            (*topic_data_)[topic_data_->size() - 1].append(
-                                current_topic_data[i].mid(0, current_topic_data[i].size() - 1));
+                            if (i > 0) {  // read topic data
+                                if (i == 1)
+                                    topic_data_->append(QVector<QString>());
+
+                                (*topic_data_)[topic_data_->size() - 1].append(
+                                    current_topic_data[i].mid(0, current_topic_data[i].size() - 1));
+                            }
                         }
                     }
                 }
+                if (!reading_started)
+                    throw std::runtime_error(QString().toStdString());
             }
-            if (!reading_started)
-                throw std::runtime_error(QString().toStdString());
+            file.close();
         }
-        file.close();
     }
     catch(...)
     {
-        auto dialog_file_open_error = new DialogFileOpenError(this);
-        dialog_file_open_error->exec();
+            auto dialog_file_open_error = new DialogFileOpenError(this);
+            dialog_file_open_error->exec();
     }
 
-    enableWorkspace();
-    loadPage(0);
+    if (!canceled)
+    {
+        enableWorkspace();
+        loadPage(0);
+    }
 }
 
 void MainWindow::enableWorkspace()
@@ -168,12 +185,14 @@ void MainWindow::loadPage(int index)
     if (index > 0) {
         ui_->PrevButton->setEnabled(true);
         ui_->NextButton->setText("Следующая");
+        ui_->NextButton->setShortcut(QKeySequence("Right"));
         last_index_ = false;
     }
 
     if (index == topic_names_->size() - 1)
     {
         ui_->NextButton->setText("Результаты");
+        ui_->NextButton->setShortcut(QKeySequence("Right"));
         last_index_ = true;
     }
 
@@ -285,8 +304,24 @@ void MainWindow::prevPage()
 
 void MainWindow::showResults()
 {
-    auto dialog_results = new DialogResults(interpret_level_, ethnic_level_, checked_tokens_, this);
+    auto dialog_results = new DialogResults(interpret_level_,
+                                            ethnic_level_,
+                                            checked_tokens_,
+                                            topic_names_,
+                                            this);
     dialog_results->exec();
+}
+
+void MainWindow::openHelp()
+{
+    auto dialog_help = new DialogHelp(this);
+    dialog_help->exec();
+}
+
+void MainWindow::openAbout()
+{
+    auto dialog_about = new DialogAbout(this);
+    dialog_about->exec();
 }
 
 void MainWindow::saveCheckedTokens()

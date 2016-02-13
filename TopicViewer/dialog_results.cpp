@@ -7,12 +7,14 @@
 DialogResults::DialogResults(std::shared_ptr<QVector<int> > interpret_level,
                              std::shared_ptr<QVector<int> > ethnic_level,
                              std::shared_ptr<QMap<QString, QVector<int>> > checked_tokens,
+                             std::shared_ptr<QVector<QString> > topic_names,
                              QWidget* parent) :
     QDialog(parent),
     ui_(new Ui::DialogResults),
     interpret_level_(interpret_level),
     ethnic_level_(ethnic_level),
-    checked_tokens_(checked_tokens)
+    checked_tokens_(checked_tokens),
+    topic_names_(topic_names)
 {
     ui_->setupUi(this);
 
@@ -101,6 +103,7 @@ void DialogResults::setTextFields()
 
 void DialogResults::saveResults()
 {
+    int topics_count = interpret_level_->size();
     // ToDo (MelLain): remove code duplication
     int interpret_none_count = 0;
     int interpret_low_count = 0;
@@ -112,7 +115,7 @@ void DialogResults::saveResults()
     int ethnic_middle_count = 0;
     int ethnic_high_count = 0;
 
-    for (int i = 0; i < interpret_level_->size(); ++i) {
+    for (int i = 0; i < topics_count; ++i) {
         if ((*interpret_level_)[i] == 0) interpret_none_count += 1;
         if ((*interpret_level_)[i] == 1) interpret_low_count += 1;
         if ((*interpret_level_)[i] == 2) interpret_middle_count += 1;
@@ -131,7 +134,7 @@ void DialogResults::saveResults()
     if (file.open(QIODevice::WriteOnly))
     {
         QTextStream stream(&file);
-        stream << "Topics count          = " << interpret_level_->size() << endl << endl;
+        stream << "Topics count          = " << topics_count << endl << endl;
 
         stream << "None interpretation   = " << interpret_none_count << endl;
         stream << "Low interpretation    = " << interpret_low_count << endl;
@@ -147,6 +150,12 @@ void DialogResults::saveResults()
         stream << "Saved tokens count    = " << checked_tokens_count << endl << endl;
         for (int i = 0; i < checked_tokens_count; ++i)
             stream << checked_tokens_->keys()[i] << endl;
+
+        stream << "\nTopics info. Pattern: topic_name, interpretation (0,1,2,3), "
+               << "ethnicity (0,1,2,3)" << checked_tokens_count << endl << endl;
+        for (int i = 0; i < topics_count; ++i)
+            stream << (*topic_names_)[i] << ", " << (*interpret_level_)[i]
+                                         << ", " << (*ethnic_level_)[i] << endl;
     }
     file.close();
 }
