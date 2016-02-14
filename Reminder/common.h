@@ -11,6 +11,7 @@
 #include <QTextStream>
 #include <QVector>
 #include <QPalette>
+#include <QMouseEvent>
 
 const int RADIO_BUTTON_SHIFT = -2;
 const QString DATA_FILE_PATH = QString("C:/Users/MelLain/reminder.dat");
@@ -21,9 +22,9 @@ const QString EVENT_LOW_RUS = QString("Низкий");
 const QString EVENT_MIDDLE_RUS = QString("Средний");
 const QString EVENT_HIGH_RUS = QString("Высокий");
 
-const QString EVENT_LOW_COLOR = QString("green");
-const QString EVENT_MIDDLE_COLOR = QString("yellow");
-const QString EVENT_HIGH_COLOR = QString("red");
+const QString LOW_COLOR = QString("green");
+const QString MIDDLE_COLOR = QString("yellow");
+const QString HIGH_COLOR = QString("red");
 
 const QString FRIEND_LOW_RUS = QString("Приятель");
 const QString FRIEND_MIDDLE_RUS = QString("Друг");

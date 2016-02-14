@@ -51,6 +51,9 @@
       <verstretch>0</verstretch>
      </sizepolicy>
     </property>
+    <property name="mouseTracking">
+     <bool>true</bool>
+    </property>
     <property name="currentIndex">
      <number>0</number>
     </property>
@@ -69,6 +72,9 @@
         <width>701</width>
         <height>461</height>
        </rect>
+      </property>
+      <property name="mouseTracking">
+       <bool>true</bool>
       </property>
       <attribute name="horizontalHeaderDefaultSectionSize">
        <number>150</number>
@@ -814,15 +820,19 @@
     <property name="title">
      <string>Пользователь</string>
     </property>
-    <addaction name="action_1"/>
+    <addaction name="ActionChangePass"/>
     <addaction name="separator"/>
-    <addaction name="action_2"/>
+    <addaction name="ActionUpdate"/>
+    <addaction name="ActionSave"/>
     <addaction name="separator"/>
-    <addaction name="action_3"/>
+    <addaction name="ActionExit"/>
    </widget>
    <addaction name="menu"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
+   <property name="mouseTracking">
+    <bool>true</bool>
+   </property>
    <attribute name="toolBarArea">
     <enum>TopToolBarArea</enum>
    </attribute>
@@ -831,12 +841,12 @@
    </attribute>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
-  <action name="action_1">
+  <action name="ActionChangePass">
    <property name="text">
     <string>Сменить пароль</string>
    </property>
   </action>
-  <action name="action_2">
+  <action name="ActionSave">
    <property name="text">
     <string>Сохранить</string>
    </property>
@@ -844,12 +854,20 @@
     <string>Ctrl+S</string>
    </property>
   </action>
-  <action name="action_3">
+  <action name="ActionExit">
    <property name="text">
     <string>Выход</string>
    </property>
    <property name="shortcut">
     <string>Esc</string>
+   </property>
+  </action>
+  <action name="ActionUpdate">
+   <property name="text">
+    <string>Обновить</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+R</string>
    </property>
   </action>
  </widget>

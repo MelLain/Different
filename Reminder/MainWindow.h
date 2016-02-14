@@ -86,6 +86,7 @@ private slots:
     void changePassword();
     void changeMoneyDiff();
     void requestExit();
+    void updateState();
     void setQLineEditColor(QLineEdit* line_edit_ptr, int value);
 
 private:

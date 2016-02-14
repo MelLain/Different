@@ -21,7 +21,7 @@ SaveExitDialog::~SaveExitDialog()
 void SaveExitDialog::saveExit()
 {
     dynamic_cast<MainWindow*>(parentWidget())->saveData();
-    OnlyExit();
+    onlyExit();
 }
 
 void SaveExitDialog::onlyExit()

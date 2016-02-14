@@ -111,9 +111,10 @@ MainWindow::MainWindow(QWidget* parent) :
 {
     ui_->setupUi(this);
 
-    connect(ui_->action_1,         SIGNAL(triggered()), this, SLOT(changePassword()));
-    connect(ui_->action_2,         SIGNAL(triggered()), this, SLOT(saveData()));
-    connect(ui_->action_3,         SIGNAL(triggered()), this, SLOT(requestExit()));
+    connect(ui_->ActionChangePass, SIGNAL(triggered()), this, SLOT(changePassword()));
+    connect(ui_->ActionSave,       SIGNAL(triggered()), this, SLOT(saveData()));
+    connect(ui_->ActionExit,       SIGNAL(triggered()), this, SLOT(requestExit()));
+    connect(ui_->ActionUpdate,     SIGNAL(triggered()), this, SLOT(updateState()));
     connect(ui_->AddEventButton,   SIGNAL(clicked()),   this, SLOT(addEvent()));
     connect(ui_->AddFriendButton,  SIGNAL(clicked()),   this, SLOT(addFriend()));
     connect(ui_->DelEventsButton,  SIGNAL(clicked()),   this, SLOT(delEvents()));
@@ -134,6 +135,7 @@ MainWindow::MainWindow(QWidget* parent) :
     connect(ui_->OldUsdElecEdit,   SIGNAL(textChanged(QString)), this, SLOT(changeMoneyDiff()));
 
     loadData();
+    updateState();
 }
 
 MainWindow::~MainWindow()
@@ -145,6 +147,31 @@ void MainWindow::changePassword()
 {
     auto change_password_dialog = new ChangePasswordDialog(&password_, this);
     change_password_dialog->exec();
+}
+
+void MainWindow::updateState()
+{
+    for (int i = 0; i < ui_->EventsTable->rowCount(); ++i)
+    {
+        QComboBox* level = dynamic_cast<QComboBox*>(ui_->EventsTable->cellWidget(i, 3));
+        if (level->currentText() == EVENT_LOW_RUS)
+            level->setStyleSheet("QComboBox { background-color:" + LOW_COLOR + "; }");
+        if (level->currentText() == EVENT_MIDDLE_RUS)
+            level->setStyleSheet("QComboBox { background-color:" + MIDDLE_COLOR + "; }");
+        if (level->currentText() == EVENT_HIGH_RUS)
+            level->setStyleSheet("QComboBox { background-color:" + HIGH_COLOR + "; }");
+    }
+
+    for (int i = 0; i < ui_->FriendsTable->rowCount(); ++i)
+    {
+        QComboBox* level = dynamic_cast<QComboBox*>(ui_->FriendsTable->cellWidget(i, 1));
+        if (level->currentText() == FRIEND_LOW_RUS)
+            level->setStyleSheet("QComboBox { background-color:" + HIGH_COLOR + "; }");
+        if (level->currentText() == FRIEND_MIDDLE_RUS)
+            level->setStyleSheet("QComboBox { background-color:" + MIDDLE_COLOR + "; }");
+        if (level->currentText() == FRIEND_HIGH_RUS)
+            level->setStyleSheet("QComboBox { background-color:" + LOW_COLOR + "; }");
+    }
 }
 
 void MainWindow::addEvent()
