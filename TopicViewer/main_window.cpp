@@ -44,6 +44,10 @@ MainWindow::MainWindow(QWidget* parent) :
     connect(ui_->ActionAbout, SIGNAL(triggered()), this, SLOT(openAbout()));
     connect(ui_->NextButton,  SIGNAL(clicked()), this, SLOT(nextPage()));
     connect(ui_->PrevButton,  SIGNAL(clicked()), this, SLOT(prevPage()));
+
+    auto verticalHeader = ui_->TokensList->verticalHeader();
+    verticalHeader->sectionResizeMode(QHeaderView::Fixed);
+    verticalHeader->setDefaultSectionSize(22);
 }
 
 MainWindow::~MainWindow()
