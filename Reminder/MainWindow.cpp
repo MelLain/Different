@@ -399,7 +399,6 @@ void MainWindow::loadData()
             }
 
             auto money_data_list = stream.readLine().split(' ');
-
             ui_->CurRubNalEdit->setText(money_data_list[0]);
             ui_->CurEurNalEdit->setText(money_data_list[1]);
             ui_->CurUsdNalEdit->setText(money_data_list[2]);
